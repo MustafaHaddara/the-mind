@@ -74,11 +74,6 @@ const playCard = (G, ctx, card) => {
     console.log(`${ctx.playerID} played`);
     const playerId = ctx.playerID;
     const playedCard = G.players[playerId].cards[card];
-    // G.players[playerId].cards = G.players[playerId].cards.filter(c => c !== playedCard);
-    // G.aboutToPlay[playerId] = null;
-
-    // G.cardsPlayed.push(playedCard);
-    // G.gameOver = isGameOver(G);
     return {
         ...G,
         players: {
@@ -95,7 +90,6 @@ const playCard = (G, ctx, card) => {
 };
 
 const aboutToPlay = (G, ctx) => {
-    // G.aboutToPlay[ctx.playerID] = Date.now();
     return {
         ...G,
         aboutToPlay: {
@@ -105,7 +99,6 @@ const aboutToPlay = (G, ctx) => {
 };
 
 const cancelPlay = (G, ctx) => {
-    // G.aboutToPlay[ctx.playerID] = null;
     return {
         ...G,
         aboutToPlay: {
@@ -117,7 +110,6 @@ const cancelPlay = (G, ctx) => {
 const resetGame = (G, ctx) => {
     return setupGame(ctx);
 }
-//
 
 export const TheMind = {
     name: 'the-mind',
