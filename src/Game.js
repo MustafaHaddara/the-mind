@@ -95,7 +95,13 @@ const playCard = (G, ctx, card) => {
 };
 
 const aboutToPlay = (G, ctx) => {
-    G.aboutToPlay[ctx.playerID] = Date.now();
+    // G.aboutToPlay[ctx.playerID] = Date.now();
+    return {
+        ...G,
+        aboutToPlay: {
+            [ctx.playerID]: Date.now()
+        }
+    }
 };
 
 const cancelPlay = (G, ctx) => {
