@@ -105,7 +105,13 @@ const aboutToPlay = (G, ctx) => {
 };
 
 const cancelPlay = (G, ctx) => {
-    G.aboutToPlay[ctx.playerID] = null;
+    // G.aboutToPlay[ctx.playerID] = null;
+    return {
+        ...G,
+        aboutToPlay: {
+            [ctx.playerID]: null
+        }
+    }
 };
 
 const resetGame = (G, ctx) => {
