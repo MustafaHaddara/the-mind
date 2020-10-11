@@ -74,25 +74,29 @@ const playCard = (G, ctx, card) => {
     console.log(`${ctx.playerID} played`);
     const playerId = ctx.playerID;
     const playedCard = G.players[playerId].cards[card];
-    return {
+    const newG = {
         ...G,
         players: {
+            ...G.players,
             [playerId]: {
                 cards: G.players[playerId].cards.filter(c => c !== playedCard)
             }
         },
         aboutToPlay: {
+            ...G.aboutToPlay,
             [playerId]: null
         },
         cardsPlayed: [...G.cardsPlayed, playedCard],
-        gameOver: isGameOver(G)
     }
+    newG.gameOver = isGameOver(newG);
+    return newG;
 };
 
 const aboutToPlay = (G, ctx) => {
     return {
         ...G,
         aboutToPlay: {
+            ...G.aboutToPlay,
             [ctx.playerID]: Date.now()
         }
     }
@@ -102,6 +106,7 @@ const cancelPlay = (G, ctx) => {
     return {
         ...G,
         aboutToPlay: {
+            ...G.aboutToPlay,
             [ctx.playerID]: null
         }
     }
