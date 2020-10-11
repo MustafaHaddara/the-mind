@@ -24,9 +24,9 @@ import { Lobby } from 'boardgame.io/react';
 //   )
 // }
 
-// const server = `https://${window.location.hostname}`;
+const server = `https://${window.location.hostname}`;
 // development mode
-const server =  `http://${window.location.hostname}:8000`;
+// const server = http://${window.location.hostname}:8000
 
 const App = () => {
   return (
