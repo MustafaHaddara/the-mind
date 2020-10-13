@@ -20,7 +20,7 @@ const shuffleDeck = (shuffle) => {
     for (let i = 1; i <= 100; i++) {
         deck.push(i);
     }
-    return shuffle(deck);;
+    return shuffle(deck);
 }
 
 const isLosingMove = (cardJustPlayed, players) => {
@@ -157,3 +157,14 @@ export const TheMind = {
 
     // plugins: [ PluginPlayer({ playerSetup: (id) => ({ cards: [], aboutToPlay: null }) })]
 }
+
+//For testing
+module.exports = {
+    isLosingMove,
+    isWinningMove,
+    isGameOver,
+    playCard,
+    aboutToPlay,
+    cancelPlay,
+    resetGame
+};
