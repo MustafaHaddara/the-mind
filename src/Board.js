@@ -12,10 +12,10 @@ const DropZone = props => {
         drop: () => { console.log("dropped on board"); props.onDrop(); }
     });
     console.log(props.cardsPlayed)
-    
+
     return (
         <div style={{textAlign: "center"}}>
-            Last card played:
+            Cards played:
             <div
                 ref={drop}
                 style={{
@@ -23,25 +23,27 @@ const DropZone = props => {
                     width: '100%',
                     height: '400px',
                     display: 'flex',
-                    flexDirection: 'column',
                     justifyContent: 'center',
                 }}
             >
                 {props.cardsPlayed.length > 0 ?
-                    <div 
-                        style={{
-                            color: 'black',
-                            fontSize: '24pt',
-                            width: '25%',
-                            height: '25%',
-                            textAlign: 'center',
-                            alignSelf: 'center',
-                        }}
-                    >
-                        {props.cardsPlayed[props.cardsPlayed.length-1]}
-                    </div>
-                    :
-                    null
+
+
+                        props.cardsPlayed.map((card) => (<div
+                            style={{
+                                color: 'black',
+                                background: 'aliceblue',
+                                fontSize: '24pt',
+                                width: '40px',
+                                padding: '4px 15px',
+                                marginRight: '10px',
+                                border: '1px solid #000',
+                                textAlign: 'center',
+                                alignSelf: 'center',
+                            }}
+                        >{card}</div>))
+
+                    : null
                 }
             </div>
         </div>
@@ -59,7 +61,7 @@ const Card = props => {
         }
     });
 
-    return <div 
+    return <div
         ref={drag}
         style={{
             outline: 'black solid 1px',
@@ -125,11 +127,11 @@ export const Board = props => {
                 aboutToPlay={props.G.aboutToPlay}
             />
 
-            <DropZone 
+            <DropZone
                 cardsPlayed={props.G.cardsPlayed}
                 onDrop={() => props.moves.playCard(0)}
             />
-            <Hand 
+            <Hand
                 cards={props.G.players[props.playerID].cards}
                 onStart={() => props.moves.aboutToPlay()}
                 onCancel={() => props.moves.cancelPlay()}
