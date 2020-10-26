@@ -30,7 +30,7 @@ const DropZone = props => {
 
 
                         props.cardsPlayed.map((card) => (<div
-                            style={{
+                            key={`card-${card.toString()}`} style={{
                                 color: 'black',
                                 background: 'aliceblue',
                                 fontSize: '24pt',
