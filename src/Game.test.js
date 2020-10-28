@@ -1,5 +1,5 @@
 
-const {
+import {
     isLosingMove,
     isWinningMove,
     isGameOver,
@@ -7,47 +7,32 @@ const {
     aboutToPlay,
     cancelPlay,
     resetGame
-} = require('./Game')
-
-const G = {
-    players: {
-        1: {
-            cards: [67, 92]
-        },
-        2: {
-            cards: [45, 99]
-        }
-    },
-    aboutToPlay: {
-        1: null
-    },
-    cardsPlayed: [3],
-}
+} from './Game';
 
 describe('Game unit tests', () => {
     it('player 1\'s move should lose the game', () => {
         const cardJustPlayed = 20;
-        G.players = {
+        const players = {
             1: {
                 cards: [10, 35]
             }
         }
-        expect(isLosingMove(cardJustPlayed, G.players)).toBe(true);
+        expect(isLosingMove(cardJustPlayed, players)).toBe(true);
     });
 
     it('is not a losing move played by player 1', () => {
         const cardJustPlayed = 5;
-        G.players = {
+        const players = {
             1: {
                 cards: [10, 35]
             }
         }
-        expect(isLosingMove(cardJustPlayed, G.players)).toBe(false);
+        expect(isLosingMove(cardJustPlayed, players)).toBe(false);
     });
 
     it('is not a losing move played by player 1 edge case', () => {
         const cardJustPlayed = 9;
-        G.players = {
+        const players = {
             1: {
                 cards: [10, 35]
             },
@@ -55,13 +40,13 @@ describe('Game unit tests', () => {
                 cards: [11, 12]
             }
         }
-        expect(isLosingMove(cardJustPlayed, G.players)).toBe(false);
+        expect(isLosingMove(cardJustPlayed, players)).toBe(false);
     });
 
     it('player 1 can win if no cards left', () => {
-        G.players = { 1: { cards: [] } }
+        const players = { 1: { cards: [] } }
 
-        expect(isWinningMove(G.players)).toBe(true);
+        expect(isWinningMove(players)).toBe(true);
     })
 
     it('Player 1 can play winning move', () => {
@@ -71,32 +56,41 @@ describe('Game unit tests', () => {
             numPlayers: 2,
             playerID: 1
         }
+        const G = {
+            players: {
+                1: { cards: [15] }
+            },
+            cardsPlayed: [3],
+        }
 
-        const newG = playCard(G, ctx, G.players[1].cards[0]);
+        const newG = playCard(G, ctx, 0);
         expect(newG.gameOver).toBe('You win!');
     })
 
     it('game should not be over, should be init', () => {
-        G.cardsPlayed = [];
+        const cardsPlayed = [];
 
-        expect(isGameOver(G)).toBeUndefined();
+        expect(isGameOver({ cardsPlayed })).toBeUndefined();
     });
 
     it('game should be over - player won the game', () => {
-        G.cardsPlayed = [3];
+        const G = {
+            players: {
+                1: { cards: [] }
+            },
+            cardsPlayed: [3],
+        }
         expect(isGameOver(G)).toBe('You win!');
     })
 
     it('game should be over - player lost the game', () => {
-        G.players = {
-            1: {
-                cards: [10, 35]
+        const G = {
+            players: {
+                1: { cards: [5] }
             },
-            2: {
-                cards: [11, 12]
-            }
+            cardsPlayed: [3, 10, 20, 53],
         }
-        G.cardsPlayed = [3, 52, 90];
+
         expect(isGameOver(G)).toBe("Game Over!");
     })
 
@@ -106,6 +100,16 @@ describe('Game unit tests', () => {
             currentPlayer: '1',
             numPlayers: 2,
             playerID: 1
+        }
+
+        const G = {
+            players: {
+                1: { cards: [15] }
+            },
+            aboutToPlay: {
+                1: null
+            },
+            cardsPlayed: [3],
         }
 
         const newG = playCard(G, ctx, G.players[1].cards[0]);
@@ -120,6 +124,12 @@ describe('Game unit tests', () => {
             numPlayers: 2,
             playerID: 1
         }
+        const G = {
+            players: {
+                1: { cards: [15] }
+            },
+            cardsPlayed: [3],
+        }
         expect(aboutToPlay(G, ctx)).toBeDefined();
     })
 
@@ -129,6 +139,12 @@ describe('Game unit tests', () => {
             currentPlayer: '1',
             numPlayers: 2,
             playerID: 1
+        }
+        const G = {
+            players: {
+                1: { cards: [15] }
+            },
+            cardsPlayed: [3],
         }
         expect(cancelPlay(G, ctx)).toBeDefined();
     })
@@ -143,6 +159,12 @@ describe('Game unit tests', () => {
             random: {
                 Shuffle(d) { return d }
             }
+        }
+        const G = {
+            players: {
+                1: { cards: [15] }
+            },
+            cardsPlayed: [3],
         }
         const newGame = resetGame(G, ctx);
 

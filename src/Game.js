@@ -23,7 +23,7 @@ const shuffleDeck = (shuffle) => {
     return shuffle(deck);
 }
 
-const isLosingMove = (cardJustPlayed, players) => {
+export const isLosingMove = (cardJustPlayed, players) => {
     const other = Object.keys(players).find(playerId => {
         const cards = players[playerId].cards;
         return cards.find(c => c < cardJustPlayed);
@@ -31,7 +31,7 @@ const isLosingMove = (cardJustPlayed, players) => {
     return !!other;
 }
 
-const isWinningMove = (players) => {
+export const isWinningMove = (players) => {
     const remaining = Object.keys(players).find(playerId => {
         const cards = players[playerId].cards;
         return cards.length > 0;
@@ -39,7 +39,7 @@ const isWinningMove = (players) => {
     return !remaining;
 }
 
-const isGameOver = (G) => {
+export const isGameOver = (G) => {
     console.log("checking endgame");
     if (G.cardsPlayed.length === 0) {
         console.log("init");
@@ -70,7 +70,7 @@ const setupGame = (ctx) => {
 }
 
 // moves
-const playCard = (G, ctx, card) => {
+export const playCard = (G, ctx, card) => {
     console.log(`${ctx.playerID} played`);
     const playerId = ctx.playerID;
     const playedCard = G.players[playerId].cards[card];
@@ -92,7 +92,7 @@ const playCard = (G, ctx, card) => {
     return newG;
 };
 
-const aboutToPlay = (G, ctx) => {
+export const aboutToPlay = (G, ctx) => {
     return {
         ...G,
         aboutToPlay: {
@@ -102,7 +102,7 @@ const aboutToPlay = (G, ctx) => {
     }
 };
 
-const cancelPlay = (G, ctx) => {
+export const cancelPlay = (G, ctx) => {
     return {
         ...G,
         aboutToPlay: {
@@ -112,7 +112,7 @@ const cancelPlay = (G, ctx) => {
     }
 };
 
-const resetGame = (G, ctx) => {
+export const resetGame = (G, ctx) => {
     return setupGame(ctx);
 }
 
@@ -157,14 +157,3 @@ export const TheMind = {
 
     // plugins: [ PluginPlayer({ playerSetup: (id) => ({ cards: [], aboutToPlay: null }) })]
 }
-
-//For testing
-module.exports = {
-    isLosingMove,
-    isWinningMove,
-    isGameOver,
-    playCard,
-    aboutToPlay,
-    cancelPlay,
-    resetGame
-};
