@@ -100,7 +100,7 @@ const addCardPosition = (G, ctx, cardPosition) => {
     }
 }
 
-const aboutToPlay = (G, ctx) => {
+export const aboutToPlay = (G, ctx) => {
     return {
         ...G,
         aboutToPlay: {
