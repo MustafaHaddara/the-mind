@@ -36,7 +36,7 @@ const App = () => {
         lobbyServer={server}
         gameComponents={[{game: TheMind, board: Board}]}
         // debug={true}
-      />;
+      />
     </div>
   );
 }

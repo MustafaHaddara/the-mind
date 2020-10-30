@@ -61,6 +61,7 @@ const setupGame = (ctx) => {
         players: {},
         aboutToPlay: {},
         cardsPlayed: [],
+        cardPositions: [],
         gameOver: false,
     };
     for (let i = 0; i < ctx.numPlayers; i++) {
@@ -91,6 +92,13 @@ const playCard = (G, ctx, card) => {
     newG.gameOver = isGameOver(newG);
     return newG;
 };
+
+const addCardPosition = (G, ctx, cardPosition) => {
+    return {
+        ...G,
+        cardPositions: [...G.cardPositions, cardPosition]
+    }
+}
 
 const aboutToPlay = (G, ctx) => {
     return {
@@ -125,6 +133,7 @@ export const TheMind = {
         aboutToPlay,
         cancelPlay,
         playCard,
+        addCardPosition,
         resetGame,
     },
 

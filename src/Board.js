@@ -9,7 +9,17 @@ const DropTypes = {
 const DropZone = props => {
     const [, drop] = useDrop({
         accept: DropTypes.CARD,
-        drop: () => { console.log("dropped on board"); props.onDrop(); }
+        drop: (item, monitor) => {
+            console.log("dropped on board");
+            props.onDrop();
+            props.moves.addCardPosition({
+                ...monitor.getClientOffset(),
+                screenWidth: window.innerWidth,
+                screenHeight: window.innerHeight,
+                scrollX: window.pageXOffset,
+                scrollY: window.pageYOffset
+            })
+        },
     });
     console.log(props.cardsPlayed)
 
@@ -22,27 +32,26 @@ const DropZone = props => {
                     backgroundColor: 'lightgrey',
                     width: '100%',
                     height: '400px',
-                    display: 'flex',
-                    justifyContent: 'center',
+                    display: 'block',
                 }}
             >
                 {props.cardsPlayed.length > 0 ?
 
 
-                        props.cardsPlayed.map((card) => (<div
-                            key={`card-${card.toString()}`} style={{
-                                color: 'black',
-                                background: 'aliceblue',
-                                fontSize: '24pt',
-                                width: '40px',
-                                padding: '4px 15px',
-                                marginRight: '10px',
-                                border: '1px solid #000',
-                                textAlign: 'center',
-                                alignSelf: 'center',
-                            }}
-                        >{card}</div>))
-
+                    props.cardsPlayed.map((card, i) => (<div
+                        key={card} style={{
+                            color: 'black',
+                            background: 'aliceblue',
+                            fontSize: '24pt',
+                            width: '80px',
+                            height: '36px',
+                            border: '1px solid #000',
+                            textAlign: 'center',
+                            position: 'absolute',
+                            top: props.cardPositions[i] ? `${(props.cardPositions[i].y + props.cardPositions[i].scrollY) / (props.cardPositions[i].screenHeight + props.cardPositions[i].scrollY + 38) * 100}%`: 'auto',
+                            left: props.cardPositions[i] ? `${(props.cardPositions[i].x + props.cardPositions[i].scrollX) / (props.cardPositions[i].screenWidth + props.cardPositions[i].scrollX + 82) * 100}%`: 'auto'
+                        }}
+                    >{card}</div>))
                     : null
                 }
             </div>
@@ -76,7 +85,7 @@ const Card = props => {
 
 const Hand = props => {
     return (
-        <div>
+        <div style={{ minHeight: '40px' }}>
             Your cards:
             <div
                 style={{
@@ -129,6 +138,8 @@ export const Board = props => {
 
             <DropZone
                 cardsPlayed={props.G.cardsPlayed}
+                cardPositions={props.G.cardPositions}
+                moves={props.moves}
                 onDrop={() => props.moves.playCard(0)}
             />
             <Hand
