@@ -22,7 +22,9 @@
     "eject": "react-scripts eject",
     "serve": "node -r esm src/server.js",
     "format": "prettier-standard --format",
-    "lint": "prettier-standard --lint"
+    "lint": "prettier-standard --lint",
+    "check-format": "prettier-standard --check --format",
+    "check-lint": "prettier-standard --check --lint"
   },
   "eslintConfig": {
     "extends": "react-app"
