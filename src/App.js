@@ -37,7 +37,6 @@ const App = () => {
         gameComponents={[{ game: TheMind, board: Board }]}
         // debug={true}
       />
-      ;
     </div>
   )
 }

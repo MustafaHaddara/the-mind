@@ -55,18 +55,19 @@ export const isGameOver = G => {
   console.log('continue')
 }
 
-const setupGame = ctx => {
-  const d = shuffleDeck(d => ctx.random.Shuffle(d))
+const setupGame = (ctx) => {
+  const d = shuffleDeck(d => ctx.random.Shuffle(d));
   const gameState = {
     players: {},
     aboutToPlay: {},
     cardsPlayed: [],
-    gameOver: false
-  }
+    cardPositions: [],
+    gameOver: false,
+  };
   for (let i = 0; i < ctx.numPlayers; i++) {
-    gameState.players[i] = { cards: [d[i]] }
+    gameState.players[i] = { cards: [d[i]] };
   }
-  return gameState
+  return gameState;
 }
 
 // moves
@@ -90,6 +91,13 @@ export const playCard = (G, ctx, card) => {
   }
   newG.gameOver = isGameOver(newG)
   return newG
+}
+
+const addCardPosition = (G, ctx, cardPosition) => {
+    return {
+        ...G,
+        cardPositions: [...G.cardPositions, cardPosition]
+    }
 }
 
 export const aboutToPlay = (G, ctx) => {
@@ -119,19 +127,20 @@ export const resetGame = (G, ctx) => {
 export const TheMind = {
   name: 'the-mind',
 
-  setup: ctx => setupGame(ctx),
+  setup: (ctx) => setupGame(ctx),
 
   moves: {
     aboutToPlay,
     cancelPlay,
     playCard,
-    resetGame
+    addCardPosition,
+    resetGame,
   },
 
   // endIf: (G) => isGameOver(G),
 
   turn: {
-    activePlayers: ActivePlayers.ALL
+      activePlayers: ActivePlayers.ALL
   },
 
   // phases: {
@@ -153,7 +162,7 @@ export const TheMind = {
   // },
 
   minPlayers: 2,
-  maxPlayers: 20
+  maxPlayers: 20,
 
   // plugins: [ PluginPlayer({ playerSetup: (id) => ({ cards: [], aboutToPlay: null }) })]
 }
