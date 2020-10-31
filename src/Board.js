@@ -141,7 +141,9 @@ const PlayerList = props => {
             key={playerId}
             style={{ color: props.aboutToPlay[playerId] ? 'red' : 'black' }}
           >
-            {name} ({props.players[playerId].cards.length} {props.players[playerId].cards.length === 1 ? 'card' : 'cards'} remaining)
+            {name} ({props.players[playerId].cards.length}{' '}
+            {props.players[playerId].cards.length === 1 ? 'card' : 'cards'}{' '}
+            remaining)
           </div>
         )
       })}
