@@ -141,7 +141,7 @@ const PlayerList = props => {
             key={playerId}
             style={{ color: props.aboutToPlay[playerId] ? 'red' : 'black' }}
           >
-            {name}
+            {name} ({props.players[playerId].cards.length} {props.players[playerId].cards.length === 1 ? 'card' : 'cards'} remaining)
           </div>
         )
       })}
@@ -166,6 +166,7 @@ export const Board = props => {
       <div>
         <PlayerList
           allPlayers={props.matchData}
+          players={props.G.players}
           currentPlayerId={props.playerID}
           aboutToPlay={props.G.aboutToPlay}
         />
