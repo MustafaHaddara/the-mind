@@ -148,7 +148,7 @@ describe('Game unit tests', () => {
   })
 
   it('can reset game', () => {
-    //ctx object for testing purposes
+    // ctx object for testing purposes
     const ctx = {
       turn: 2,
       currentPlayer: '1',

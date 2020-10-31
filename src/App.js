@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import { Client } from 'boardgame.io/react'
-import { SocketIO, Local } from 'boardgame.io/multiplayer'
+import React from 'react'
 import { Board } from './Board'
 import { TheMind } from './Game'
 import { Lobby } from 'boardgame.io/react'
@@ -26,7 +24,7 @@ import { Lobby } from 'boardgame.io/react'
 
 const server = `https://${window.location.hostname}`
 // development mode
-// const server = http://${window.location.hostname}:8000
+// const server = `http://${window.location.hostname}:8000`
 
 const App = () => {
   return (
