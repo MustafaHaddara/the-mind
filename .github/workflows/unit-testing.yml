@@ -26,3 +26,9 @@ jobs:
     - run: npm test
       env:
         CI: true
+    - run: npm run check-format
+      env:
+        CI: true
+    - run: npm run check-lint
+      env:
+        CI: true
