@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Client } from 'boardgame.io/react';
+import React, { useState } from 'react'
+import { Client } from 'boardgame.io/react'
 import { SocketIO, Local } from 'boardgame.io/multiplayer'
-import { Board } from './Board';
-import { TheMind } from './Game';
-import { Lobby } from 'boardgame.io/react';
+import { Board } from './Board'
+import { TheMind } from './Game'
+import { Lobby } from 'boardgame.io/react'
 
 // const MindClient = Client({
 //   game: TheMind,
@@ -24,7 +24,7 @@ import { Lobby } from 'boardgame.io/react';
 //   )
 // }
 
-const server = `https://${window.location.hostname}`;
+const server = `https://${window.location.hostname}`
 // development mode
 // const server = http://${window.location.hostname}:8000
 
@@ -34,10 +34,11 @@ const App = () => {
       <Lobby
         gameServer={server}
         lobbyServer={server}
-        gameComponents={[{game: TheMind, board: Board}]}
+        gameComponents={[{ game: TheMind, board: Board }]}
         // debug={true}
-      />;
+      />
+      ;
     </div>
-  );
+  )
 }
-export default App;
+export default App

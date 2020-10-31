@@ -7,6 +7,7 @@ To test locally, change the `server` definition in `App.js`.
 Run `npm run start` to start the front end and `npm run serve` to start the back end.
 
 ## Todo:
+
 - show which players are remaining and/or how many cards they have left
 - show all of the cards that have been played + highlight the last card played
 - make it playable with more than 1 card per person
@@ -16,6 +17,7 @@ Run `npm run start` to start the front end and `npm run serve` to start the back
 - rewrite turn funcs to treat G as immutable
 
 ## Sample State:
+
 ```
 const G = {
     players: {
